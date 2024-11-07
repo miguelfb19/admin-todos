@@ -12,15 +12,16 @@ const putSchema = yup.object({
 });
 
 const getTodo = async (id: string) => {
+  try {
+  } catch (error) {}
   const todo = await prisma.todo.findFirst({
     where: {
       id: id,
     },
   });
-  if (!todo) {
+  if (!todo)
     return NextResponse.json({ message: "Todo not found" }, { status: 404 });
-  }
-  return NextResponse.json(todo);
+  else return NextResponse.json(todo);
 };
 
 export async function GET(request: Request, { params }: Args) {
@@ -29,7 +30,6 @@ export async function GET(request: Request, { params }: Args) {
 }
 
 export async function PUT(request: Request, { params }: Args) {
-  
   try {
     await getTodo(params.id);
     const { complete, description } = await putSchema.validate(
@@ -49,7 +49,7 @@ export async function PUT(request: Request, { params }: Args) {
 }
 
 export async function DELETE(request: Request, { params }: Args) {
-  const todo = await getTodo(params.id)
+  const todo = await getTodo(params.id);
   try {
     await prisma.todo.delete({
       where: {
@@ -58,8 +58,7 @@ export async function DELETE(request: Request, { params }: Args) {
     });
 
     return NextResponse.json(`TODO eliminado con id: ${params.id}`);
-
   } catch (error) {
-    return NextResponse.json(error, { status: 400 });
+    return NextResponse.json(error, {status: 400 });
   }
 }
