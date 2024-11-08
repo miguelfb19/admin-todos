@@ -42,6 +42,7 @@ export const Sidebar = () => {
           <Image
             width={200}
             height={200}
+            priority
             src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
             alt=""
             className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"

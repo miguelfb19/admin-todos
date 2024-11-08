@@ -22,7 +22,7 @@ const getTodo = async (id: string) => {
   if (!todo)
     return NextResponse.json({ message: "Todo not found" }, { status: 404 });
   else return NextResponse.json(todo);
-};
+}
 
 export async function GET(request: Request, { params }: Args) {
   const todo = await getTodo(params.id);
@@ -49,7 +49,6 @@ export async function PUT(request: Request, { params }: Args) {
 }
 
 export async function DELETE(request: Request, { params }: Args) {
-  const todo = await getTodo(params.id);
   try {
     await prisma.todo.delete({
       where: {

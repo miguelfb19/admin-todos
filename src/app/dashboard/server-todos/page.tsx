@@ -6,7 +6,7 @@ export const metadata = {
   description: "Crear nuevo TODO",
 };
 
-export default async function RestTodosPage() {
+export default async function ServerTodosPage() {
   const todos = await prisma.todo.findMany({ orderBy: { description: "asc" } });
 
   return (
@@ -14,7 +14,7 @@ export default async function RestTodosPage() {
       <div className="w-full px-3 mb-5">
         <NewTodo />
       </div>
-      <h3 className="text-4xl w-full text-center mb-10">Todo List</h3>
+      <h3 className="text-4xl w-full text-center mb-10">Server Todos List</h3>
       <TodosGrid todos={todos} />
     </div>
   );

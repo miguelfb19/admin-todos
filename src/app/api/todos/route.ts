@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import * as yup from "yup";
 
 export async function GET(request: Request) {
@@ -47,4 +47,34 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(error, { status: 400 });
   }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const deletedTodos = await prisma.todo.deleteMany({
+      where: {
+        complete: true,
+      },
+    });
+
+    if (deletedTodos.count == 0) {
+      return NextResponse.json({
+        message: "No hay TODOS completados para eliminar",
+        status: 400,
+      });
+    } else {
+      return NextResponse.json({
+        message: `Se eliminaron ${deletedTodos.count} TODOS completados`,
+        status: 200,
+      });
+    }
+  } catch (error) {
+    return NextResponse.json({
+      error,
+      message: "No se pudieron eliminar los TODOS",
+      status: 400,
+    });
+  }
+
+  return;
 }
