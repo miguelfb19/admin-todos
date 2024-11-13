@@ -2,8 +2,9 @@
 
 import { Todo } from "@prisma/client";
 import { TodoItem } from "./TodoItem";
-import { updateTodo } from "../helpers/todos";
-import { useRouter } from "next/navigation";
+// import { updateTodo } from "../helpers/todos";
+
+import { toggleTodo } from "../actions/todo-actions";
 
 interface Props {
   todos: Todo[];
@@ -11,14 +12,12 @@ interface Props {
 
 export const TodosGrid = ({ todos = [] }: Props) => {
 
-  const router = useRouter();
-  
 
-  const toggleTodo = async (id: string, complete: boolean): Promise<Todo> => {
-    const update = await updateTodo(id, complete);
-    router.refresh(); //esto hace que se refresque solo el componente TodoItem que llama a la función
-    return update;
-  };
+  // const toggleTodo = async (id: string, complete: boolean): Promise<Todo> => {
+  //   const update = await updateTodo(id, complete);
+  //   router.refresh(); //esto hace que se refresque solo el componente TodoItem que llama a la función
+  //   return update;
+  // };
 
   return (
     <div className="flex flex-col gap-y-10">

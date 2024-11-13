@@ -2,9 +2,10 @@
 
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import { createTodo, deletedTodo } from "../helpers/todos";
 import { useRouter } from "next/navigation";
 import { CgSpinner } from "react-icons/cg";
+import { addTodo, deletedCompleted } from "../actions/todo-actions";
+import { usePathname } from "next/navigation";
 
 export const NewTodo = () => {
 
@@ -12,6 +13,8 @@ export const NewTodo = () => {
   const [loadingCreate, setLoadingCreate] = useState(true);
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const path = usePathname().split('/').at(-1)!
+  
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -20,9 +23,9 @@ export const NewTodo = () => {
 
     setLoadingCreate(false);
     try {
-      const todo = await createTodo(description);
+      const todo = await addTodo(description, path);
       console.log(`Todo Creado: ${todo}`);
-      router.refresh();
+      // router.refresh();
       setLoadingCreate(true);
       setDescription("");
     } catch (error) {
@@ -30,11 +33,10 @@ export const NewTodo = () => {
     }
   };
 
-  const deleteCompleted = async () => {
+  const deleteAll = async () => {
     try {
-      const deletedTodos = await deletedTodo();
+      const deletedTodos = await deletedCompleted(path);
       console.log(deletedTodos);
-      router.refresh();
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +88,7 @@ export const NewTodo = () => {
       </button>
 
       <button
-        onClick={deleteCompleted}
+        onClick={deleteAll}
         type="button"
         className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
       >

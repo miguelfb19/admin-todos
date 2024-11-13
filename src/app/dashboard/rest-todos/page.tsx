@@ -1,3 +1,7 @@
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+//Esto hace que esta pagina sea generada dinamicamente siempre
+
 import prisma from "@/lib/prisma";
 import { NewTodo, TodosGrid } from "@/todos/components";
 
@@ -7,6 +11,8 @@ export const metadata = {
 };
 
 export default async function RestTodosPage() {
+  console.log('contruido');
+  
   const todos = await prisma.todo.findMany({ orderBy: { description: "asc" } });
 
   return (
