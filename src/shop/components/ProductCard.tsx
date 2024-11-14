@@ -1,6 +1,6 @@
 "use client";
 
-import { addProductToCart } from "@/shopping-cart/actions/actions";
+import { addProductToCart, removeProductFromCart } from "@/shopping-cart/actions/actions";
 // https://tailwindcomponents.com/component/e-commerce-product-card
 
 import Image from "next/image";
@@ -20,6 +20,11 @@ export const ProductCard = ({ id, name, price, rating, image }: Props) => {
 
   const onAddToCart = () => {
     addProductToCart(id);
+    router.refresh();
+  };
+
+  const onRemoveCart = () => {
+    removeProductFromCart(id);
     router.refresh();
   };
 
@@ -77,7 +82,7 @@ export const ProductCard = ({ id, name, price, rating, image }: Props) => {
             >
               <IoAddCircleOutline size={25} />
             </button>
-            <button className="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-800">
+            <button onClick={onRemoveCart} className="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-800">
               <IoTrashOutline size={20} />
             </button>
           </div>
