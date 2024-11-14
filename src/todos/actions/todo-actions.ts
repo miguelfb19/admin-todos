@@ -32,7 +32,7 @@ export const addTodo = async (
     const todo = await prisma.todo.create({ data: { description } });
     revalidatePath(`/dashboard/${pathToRevalidate}`);
     return todo;
-  } catch (error) {
+  } catch {
     return { message: "Error al crear el todo" };
   }
 };

@@ -23,7 +23,7 @@ export const TodoItem = ({ todo, updateTodo }: Props) => {
     try {
       startTransition(() => toggleTodoOptimistic(!todoOptimistic.complete));
       await updateTodo(todoOptimistic.id, !todoOptimistic.complete);
-    } catch (error) {
+    } catch {
       startTransition(() => toggleTodoOptimistic(!todoOptimistic.complete));
     }
   };

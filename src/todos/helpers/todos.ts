@@ -2,7 +2,7 @@ import { Todo } from "@prisma/client";
 
 export const updateTodo = async (
   id: string,
-  complete: Boolean
+  complete: boolean
 ): Promise<Todo> => {
   const body = {
     complete: complete,

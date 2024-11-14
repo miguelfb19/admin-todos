@@ -12,8 +12,6 @@ const putSchema = yup.object({
 });
 
 const getTodo = async (id: string) => {
-  try {
-  } catch (error) {}
   const todo = await prisma.todo.findFirst({
     where: {
       id: id,
