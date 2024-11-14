@@ -1,5 +1,11 @@
 import { WidgetItem } from "@/components";
 
+
+export const metadata = {
+ title: 'Dashboard',
+ description: 'Dashboard',
+};
+
 export default function DashboardPage() {
   return (
     <div>

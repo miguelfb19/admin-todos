@@ -6,7 +6,7 @@ import prisma from "@/lib/prisma";
 import { NewTodo, TodosGrid } from "@/todos/components";
 
 export const metadata = {
-  title: "Crear nuevo TODO",
+  title: "Server TODOS",
   description: "Crear nuevo TODO",
 };
 
