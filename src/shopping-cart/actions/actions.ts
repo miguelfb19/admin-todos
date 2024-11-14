@@ -30,3 +30,16 @@ export const removeProductFromCart = (id: string) => {
 
   setCookie("cart", JSON.stringify(cookieCart));
 };
+
+export const substractProductFromCart = (id: string) => {
+  const cookieCart = getCookieCart();
+
+  if (cookieCart[id]) {
+   cookieCart[id]--;
+  }
+  if(cookieCart[id] == 0){
+    delete cookieCart[id];
+  }
+
+  setCookie("cart", JSON.stringify(cookieCart));
+};

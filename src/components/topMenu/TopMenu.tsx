@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import Link from "next/link";
 import React from "react";
 import {
   CiChat1,
@@ -53,14 +54,14 @@ export const TopMenu = async () => {
           <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
             <CiChat1 size={25} />
           </button>
-          <button className="flex items-center justify-center w-16 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+          <Link href="/dashboard/cart" className="flex items-center justify-center w-16 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
             {totalItemsCart > 0 && (
               <div className="text-xs rounded-full bg-red-600 text-white p-[0.6rem] h-1 w-1 flex justify-center items-center font-bold">
                 {totalItemsCart}
               </div>
             )}
             <CiShoppingCart size={25} />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
