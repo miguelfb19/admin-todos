@@ -22,7 +22,7 @@ const getTodo = async (id: string) => {
   else return NextResponse.json(todo);
 }
 
-export async function GET(request: Request, { params }: Args) {
+export async function GET({ params }: Args) {
   const todo = await getTodo(params.id);
   return todo;
 }
