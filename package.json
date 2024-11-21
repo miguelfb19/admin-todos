@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
-    "cookies-next": "^5.0.2",
-    "next": "15.0.2",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "cookies-next": "^4.3.0",
+    "next": "14.2.18",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-icons": "^5.3.0",
     "yup": "^1.4.0"
   },
