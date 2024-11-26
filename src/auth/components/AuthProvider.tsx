@@ -7,7 +7,7 @@ interface Props {
 }
 
 
-export function AuthProvider({children, ...rest}: Props) {
+export function AuthProvider({children}: Props) {
   return (
     <SessionProvider>
       {children}

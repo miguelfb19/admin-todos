@@ -15,7 +15,7 @@ export default function ProfilePage() {
           height={100}
           src={session?.user?.image! ?? ""}
           alt={session?.user?.name ?? "profile picture"}
-          className="rounded-full shadow-xl shadow-blue-500"
+          className="rounded-full shadow-xl shadow-blue-500 mb-5"
         />
         <span>
           <b>Nombre de usuario: </b>

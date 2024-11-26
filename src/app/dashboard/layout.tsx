@@ -1,5 +1,7 @@
 // Admin Dashboard https://tailwindcomponents.com/component/dashboard-12
+
 import { Sidebar, TopMenu } from "@/components";
+// import { AuthProvider } from "@/auth";
 
 export default function DashboardLayout({
   children,
@@ -11,7 +13,9 @@ export default function DashboardLayout({
       <Sidebar />
       <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] min-h-screen">
         <TopMenu />
-        <div className="px-6 pt-6">{children}</div>
+        <div id="principal-pagination-content" className="mt-20 p-5">
+          {children}
+        </div>
       </div>
     </>
   );

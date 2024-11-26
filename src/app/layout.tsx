@@ -14,8 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="en">
-        <body>{children}</body>
+      <html lang="es">
+        <body>
+          <div className="ml-auto mb-6 h-screen w-screen">{children}</div>
+        </body>
       </html>
     </AuthProvider>
   );
