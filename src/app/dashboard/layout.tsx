@@ -11,7 +11,7 @@ export default function DashboardLayout({
   return (
     <>
       <Sidebar />
-      <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] min-h-screen">
+      <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] max-h-screen">
         <TopMenu />
         <div id="principal-pagination-content" className="mt-20 p-5">
           {children}
