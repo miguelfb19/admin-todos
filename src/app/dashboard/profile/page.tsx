@@ -2,9 +2,15 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
+  const router =useRouter()
   const { data: session } = useSession();
+
+  if(!session){
+    router.push('/api/auth/signin')
+  }
 
   return (
     <div className="flex flex-col w-full justify-center items-center">

@@ -49,9 +49,9 @@ const menuItems = [
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
+  const userName = session?.user?.name ?? 'No name' 
+  const userEmail = session?.user?.email ?? 'No email'
+  
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div className="overflow-scroll">
@@ -71,11 +71,11 @@ export const Sidebar = async () => {
         </div>
 
         <div className="mt-8 text-center">
-          {!session ? (
+          {!session?.user?.image ? (
             <Image
               width={100}
               height={100}
-              src="/images/foto.jpeg"
+              src="/images/no-session.png"
               alt="profile image no session"
               className="w-6 h-6 m-auto rounded-full object-cover lg:w-20 lg:h-20"
             />
@@ -89,10 +89,10 @@ export const Sidebar = async () => {
             />
           )}
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-            {session.user?.name ?? "No name"}
+            {userName}
           </h5>
           <span className="text-sm text-gray-500">
-            {session.user?.email ?? "no email"}
+            {userEmail}
           </span>
           <span className="hidden text-gray-400 lg:block">Admin</span>
         </div>
