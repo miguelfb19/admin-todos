@@ -10,7 +10,6 @@ import {
 import { BiCookie, BiShoppingBag } from "react-icons/bi";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
 import { Logout } from "./Logout";
 
 const menuItems = [
