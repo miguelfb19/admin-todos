@@ -19,7 +19,7 @@ export default function ProfilePage() {
         <Image
           width={100}
           height={100}
-          src={session?.user?.image! ?? ""}
+          src={session?.user?.image! ?? "/images/no-session.png"}
           alt={session?.user?.name ?? "profile picture"}
           className="rounded-full shadow-xl shadow-blue-500 mb-5"
         />

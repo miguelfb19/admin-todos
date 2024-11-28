@@ -4,13 +4,15 @@ import { Todo } from "@prisma/client";
 import styles from "./TodoItem.module.css";
 import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";
 import { startTransition, useOptimistic } from "react";
+import { User } from "next-auth";
 
 interface Props {
   todo: Todo;
-  updateTodo: (id: string, complete: boolean) => Promise<Todo>;
+  updateTodo: (id: string, complete: boolean, userId: string) => Promise<Todo>;
+  user: User
 }
 
-export const TodoItem = ({ todo, updateTodo }: Props) => {
+export const TodoItem = ({ todo, updateTodo, user }: Props) => {
   const [todoOptimistic, toggleTodoOptimistic] = useOptimistic(
     todo,
     (state, newCompleteValue: boolean) => ({
@@ -22,7 +24,7 @@ export const TodoItem = ({ todo, updateTodo }: Props) => {
   const onToggleTodo = async () => {
     try {
       startTransition(() => toggleTodoOptimistic(!todoOptimistic.complete));
-      await updateTodo(todoOptimistic.id, !todoOptimistic.complete);
+      await updateTodo(todoOptimistic.id, !todoOptimistic.complete, user.id);
     } catch {
       startTransition(() => toggleTodoOptimistic(!todoOptimistic.complete));
     }

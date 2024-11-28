@@ -6,15 +6,20 @@ import { useRouter } from "next/navigation";
 import { CgSpinner } from "react-icons/cg";
 import { addTodo, deletedCompleted } from "../actions/todo-actions";
 import { usePathname } from "next/navigation";
+import { User } from "next-auth";
+// import { getUserSessionServer } from "@/auth/actions/auth-actions";
 
-export const NewTodo = () => {
 
+interface Props {
+  user: User
+}
+
+export const NewTodo = ({ user }: Props) => {
   const [loadingSeed, setLoadingSeed] = useState(true);
   const [loadingCreate, setLoadingCreate] = useState(true);
   const [description, setDescription] = useState("");
   const router = useRouter();
-  const path = usePathname().split('/').at(-1)!
-  
+  const path = usePathname().split("/").at(-1)!;
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,7 +28,7 @@ export const NewTodo = () => {
 
     setLoadingCreate(false);
     try {
-      const todo = await addTodo(description, path);
+      const todo = await addTodo(description, path, user.id);
       console.log(`Todo Creado: ${todo}`);
       // router.refresh();
       setLoadingCreate(true);
@@ -35,7 +40,7 @@ export const NewTodo = () => {
 
   const deleteAll = async () => {
     try {
-      const deletedTodos = await deletedCompleted(path);
+      const deletedTodos = await deletedCompleted(path, user.id);
       console.log(deletedTodos);
     } catch (error) {
       console.log(error);

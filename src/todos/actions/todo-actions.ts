@@ -6,9 +6,10 @@ import { revalidatePath } from "next/cache";
 
 export const toggleTodo = async (
   id: string,
-  complete: boolean
+  complete: boolean,
+  idUser: string
 ): Promise<Todo> => {
-  const todo = await prisma.todo.findFirst({ where: { id } });
+  const todo = await prisma.todo.findFirst({ where: { id, userId: idUser } });
 
   if (!todo) {
     throw new Error(`Todo con id ${id} no encontrado`);
@@ -26,10 +27,15 @@ export const toggleTodo = async (
 
 export const addTodo = async (
   description: string,
-  pathToRevalidate: string
+  pathToRevalidate: string,
+  idUser: string
 ) => {
   try {
-    const todo = await prisma.todo.create({ data: { description } });
+    // const user = await getUserSessionServer()
+    // Acutalmente (v14.2) esta manera de obterner el user no funciona, por el momento se hara por medio de restful-API
+    const todo = await prisma.todo.create({
+      data: { description, userId: idUser },
+    });
     revalidatePath(`/dashboard/${pathToRevalidate}`);
     return todo;
   } catch {
@@ -37,14 +43,17 @@ export const addTodo = async (
   }
 };
 
-export const deletedCompleted = async (pathTorevalidate: string) => {
+export const deletedCompleted = async (
+  pathTorevalidate: string,
+  idUser: string
+) => {
   try {
     const deletedTodos = await prisma.todo.deleteMany({
-      where: { complete: true },
+      where: { complete: true, userId: idUser },
     });
     revalidatePath(`/dashboard/${pathTorevalidate}`);
-    if(deletedTodos.count == 0){
-      return
+    if (deletedTodos.count == 0) {
+      return;
     }
     return deletedTodos;
   } catch (error) {

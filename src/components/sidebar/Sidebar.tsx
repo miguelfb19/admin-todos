@@ -48,9 +48,15 @@ const menuItems = [
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
 
-  const userName = session?.user?.name ?? 'No name' 
-  const userEmail = session?.user?.email ?? 'No email'
-  
+  const userName = session?.user?.name ?? "No name";
+  const userEmail = session?.user?.email ?? "No email";
+  const userRoles = session?.user?.roles!;
+
+  const role =
+    userRoles?.find((role) => role == "admin") ||
+    userRoles?.find((role) => role == "client") ||
+    "No role";
+
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div className="overflow-scroll">
@@ -90,10 +96,8 @@ export const Sidebar = async () => {
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             {userName}
           </h5>
-          <span className="text-sm text-gray-500">
-            {userEmail}
-          </span>
-          <span className="hidden text-gray-400 lg:block">Admin</span>
+          <span className="text-sm text-gray-500">{userEmail}</span>
+          <span className="hidden text-gray-400 lg:block capitalize">{role}</span>
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8 ">
